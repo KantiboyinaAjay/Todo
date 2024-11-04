@@ -1,0 +1,79 @@
+.taskboard{
+    width: Fixed(60px);
+    height: 60px;
+    padding: 16px 24px 16px 24px;
+    gap: 10px;
+    border: 0px 0px 1px 0px;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    flex-direction: row;
+}
+
+.list-item {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: left;
+    width: 100%;
+    padding: 10px 24px;
+    border-radius: 8px;
+    background-color: white;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    animation: fadeIn 0.5s forwards;
+}
+
+.delete{
+    display: flex;
+    justify-content: space-between;
+}
+
+.list-item:hover {
+    background-color: rgba(235, 238, 252, 1);
+    cursor: pointer;
+}
+
+.list-item:focus,
+.list-item.active {
+    background-color: rgba(235, 238, 252, 1);
+    color: #333;
+    outline: none;
+}
+
+
+.list-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-decoration: none;
+    padding: 0px 10px;
+    border-bottom: 2px solid rgba(235, 238, 252, .7);
+}
+
+.list-group {
+    list-style-type: none;
+    width: 100%;
+}
+
+.add-project {
+    width: 100%;
+    padding: 10px 34px;
+    display: flex;
+    flex-direction: row;
+    font-size: 12px;
+    gap: 5px;
+    color: rgba(54, 89, 226, 1);
+    cursor: pointer;
+}
+
+.toggle-input-field {
+    display: block;
+    margin-top: 10px;
+    padding: 8px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}

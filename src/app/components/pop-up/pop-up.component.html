@@ -1,0 +1,47 @@
+<div class="popup-container">
+  <div class="title">
+    <div [ngStyle]="{ 'color':'rgba(38, 63, 160, 1)'}">
+      {{popUpHeading}}
+    </div>
+    <mat-icon aria-hidden="false" aria-label="close icon" fontIcon="close" (click)="close()"
+      [ngStyle]="{ color: 'rgba(151, 161, 178, 1)', cursor: 'pointer' }">
+    </mat-icon>
+  </div>
+  <hr />
+
+  <form class="form-sheet" #taskForm="ngForm" (ngSubmit)="operation(taskForm)">
+    <label>
+      Name of the Task
+      <br />
+      <input placeholder="Text" class="input-field" name="taskName" [(ngModel)]="taskData.taskName" required>
+    </label>
+    <div class="dates-row">
+      <label>
+        Start Date
+        <br />
+        <input type="date" name="startDate" [(ngModel)]="taskData.startDate" required [ngStyle]="{ cursor: 'pointer'}">
+      </label>
+      <label>
+        Deadline Date
+        <br />
+        <input type="date" name="deadlineDate" [(ngModel)]="taskData.endDate" required [ngStyle]="{ cursor: 'pointer'}">
+      </label>
+    </div>
+    <label>
+      Status
+      <br />
+      <select class="input-field" name="status" [(ngModel)]="taskData.status" required>
+        <option value="ToDo">🔸 ToDo</option>
+        <option value="In Progress">🔹 In Progress</option>
+        <option value="In Review">🔸 In Review</option>
+        <option value="Completed">🔹 Completed</option>
+      </select>
+    </label>
+  </form>
+
+  <hr />
+  <div class="save-row">
+    <button (click)="close()" class="cancel-button">Cancel</button>
+    <button (click)="taskForm.ngSubmit.emit()" class="save-button">{{operationButtonText}}</button>
+  </div>
+</div>

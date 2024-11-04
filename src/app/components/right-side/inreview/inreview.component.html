@@ -1,0 +1,27 @@
+<div class="todo-in-review">• In Review</div>
+<div *ngFor="let td of inReview" class="task-card"
+(click)="openDialog(td.status,'Edit Task','Save',td.taskName,td.startDate,td.deadlineDate,td.id)">
+<div class="task-name">
+    {{ td?.taskName || 'No task name available' }}
+</div>
+<div class="task-dates-row">
+    <div class="text-col">
+        Start Date
+        <br />
+        <div class="task-date-light-blue">
+            {{td.startDate}}
+        </div>
+    </div>
+    <div class="text-col">
+        Deadline
+        <br />
+        <div class="task-date-light-blue">
+            {{td.deadlineDate}}
+        </div>
+    </div>
+</div>
+</div>
+<button class="todo-in-review-add-button" (click)="openDialog('In Review','Add New Task')">
+<p>+</p>
+<p>Add New</p>
+</button>

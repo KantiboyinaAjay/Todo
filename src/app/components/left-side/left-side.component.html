@@ -1,0 +1,26 @@
+<div class="taskboard">
+    <img src="../../../assets/ghost-org.png" alt="Loading..">
+    <h2>Task Board</h2>
+</div>
+<div class="list-container">
+    <ul class="list-group">
+        <li class="list-item" tabindex="0" *ngFor="let pro of project; let i = index">
+            <div class="delete" (click)="store_title(pro)">
+                <span>{{pro.projecttitle}}</span>
+                <a (click)="delete(i)">🗑</a>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<input 
+    type="text"
+    *ngIf="showinput"
+    [(ngModel)]="inputvalue"
+    (keydown.enter) = "saveinput()"
+    placeholder="enter Project"
+    class="toggle-input-field"
+/>
+<div class="add-project" (click)="toggleinput()">
+    +  Add new Project
+</div>

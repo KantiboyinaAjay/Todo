@@ -1,0 +1,88 @@
+.todo-in-review {
+    background-color: rgba(236, 246, 252, 1);
+    height: 32px;
+    padding: 4px 12px;
+    margin-bottom: 10px;
+    width: fit-content;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 20px;
+    color: rgba(63, 161, 227, 1);
+    font-size: 12px;
+}
+
+.todo-in-review-add-button {
+    width: 270px;
+    height: 32px;
+    background-color: rgba(236, 246, 252, 1);
+    border: none;
+    border-radius: 8px;
+    margin-top: 25px;
+    display: inline-flex;
+    gap: 5px;
+    flex-direction: row;
+    align-items: center;
+    font-family: "Nunito Sans";
+    justify-content: center;
+    cursor: pointer;
+}
+
+.todo-in-review-add-button>p {
+    margin: 0;
+    color: rgba(63, 161, 227, 1);
+    font-size: 12px;
+}
+
+.task-card {
+    width: 270px;
+    height: 114px;
+    padding: 16px;
+    gap: 10px;
+    border-radius: 8px;
+    opacity: 0px;
+    box-shadow: 0px 0px 8px 0px rgba(54, 89, 226, 0.16);
+    cursor: pointer;
+
+}
+
+.task-card:hover {
+    box-shadow: 0px 0px 15px 0px rgba(54, 89, 226, 0.16);
+}
+
+.task-name {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: black;
+}
+
+.task-dates-row {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.text-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 24px;
+    color: rgba(119, 119, 119, 1);
+    gap: 4px;
+}
+
+.task-date-light-blue {
+    background-color: rgba(236, 246, 252, 1);
+    color: rgba(63, 161, 227, 1);
+    font-size: 12px;
+    font-weight: 400;
+    padding: 4px 8px;
+    border-radius: 8px;
+    height: 24px;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+}
