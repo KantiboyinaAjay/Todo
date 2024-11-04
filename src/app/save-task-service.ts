@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import Toastify from 'toastify-js';
 
 interface ProjectType{
   id:string;
@@ -45,7 +46,14 @@ export class SaveTaskService {
     
     if(p_id === '')
     {
-      alert('Select or create a project before adding a task');
+      Toastify({
+        text: "⚠️Select or create a project before adding a task⚠️",
+        duration: 2000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "dark",
+      }).showToast();
     }
     else
     {
