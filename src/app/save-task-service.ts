@@ -42,21 +42,28 @@ export class SaveTaskService {
   addTask(task: any) {
     let p_id: string = '';
     this.selectproject.subscribe((project) => { if (project) p_id = project.id });
-
-    const currentTasks = this.loadTasks(p_id);
-    currentTasks.push(task);
-
-    if (this.isLocalStorageAvailable()) {
-        let dummy_project = JSON.parse(localStorage.getItem('project') || '[]');
-        const index = dummy_project.findIndex((project: any) => project.id === p_id);
-
-        if (index !== -1) {
-            dummy_project[index].task = [...currentTasks];
-            localStorage.setItem('project', JSON.stringify(dummy_project));
-        }
+    
+    if(p_id === '')
+    {
+      alert('Select or create a project before adding a task');
     }
+    else
+    {
+      const currentTasks = this.loadTasks(p_id);
+      currentTasks.push(task);
 
-    this.tasksSubject.next(currentTasks);
+      if (this.isLocalStorageAvailable()) {
+          let dummy_project = JSON.parse(localStorage.getItem('project') || '[]');
+          const index = dummy_project.findIndex((project: any) => project.id === p_id);
+
+          if (index !== -1) {
+              dummy_project[index].task = [...currentTasks];
+              localStorage.setItem('project', JSON.stringify(dummy_project));
+          }
+      }
+
+      this.tasksSubject.next(currentTasks);
+    }
   }
 
 
