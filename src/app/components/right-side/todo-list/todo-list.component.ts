@@ -24,7 +24,7 @@ export class TodoListComponent implements OnInit {
     deadlineDate?: string,
     id?:string
   ) {
-    const dialogRef = this.dialog.open(PopUpComponent, {
+      this.dialog.open(PopUpComponent, {
       width: '670px',
       height: '395px',
       disableClose: false,
@@ -50,8 +50,6 @@ export class TodoListComponent implements OnInit {
   ngOnInit() {
     this.SaveTaskService.tasks_list.subscribe((tasks) => {
       this.tasks = tasks;
-      
-      // console.log(tasks);
 
       this.todo = tasks.filter((task) => task.status === 'ToDo');
       this.inProgress = tasks.filter((task) => task.status === 'In Progress');

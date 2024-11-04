@@ -24,8 +24,6 @@ export class PopUpComponent implements OnInit {
   operationButtonText: string = '';
 
   ngOnInit(): void {
-    // console.log(this.data.operation);
-    this.taskData.status = this.data.type;
     this.operationButtonText = this.data.operation == 'Save' ? 'Save' : 'Add';
   }
   popUpHeading = this.data.heading;
@@ -50,7 +48,6 @@ export class PopUpComponent implements OnInit {
         id: this.data.id,
       };
       this.taskService.update(taskData);
-
       this.dialog.closeAll();
     }
   }
@@ -68,17 +65,19 @@ export class PopUpComponent implements OnInit {
       };
 
       this.taskService.addTask(taskData);
-
       this.resetTaskData();
-    } else {
+    } 
+    else {
       alert(`Data is invalid. Please check your input.`);
     }
 
     this.dialog.closeAll();
   }
+
   close() {
     this.dialog.closeAll();
   }
+  
   private resetTaskData() {
     this.taskData = {
       taskName: '',

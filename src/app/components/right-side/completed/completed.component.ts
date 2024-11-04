@@ -50,7 +50,6 @@ export class CompletedComponent {
     this.SaveTaskService.tasks_list.subscribe((tasks) => {
       this.tasks = tasks;
 
-      // Filter Tasks to Separate Tabs with status check
       this.todo = tasks.filter((task) => task.status === 'ToDo');
       this.inProgress = tasks.filter((task) => task.status === 'In Progress');
       this.inReview = tasks.filter((task) => task.status === 'In Review');
