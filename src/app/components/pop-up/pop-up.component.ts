@@ -57,7 +57,8 @@ export class PopUpComponent implements OnInit {
         gravity: "top",
         position: "center",
         style: {
-          background: "rgb(235, 252, 236)"
+          background: "rgb(235, 252, 236)",
+          color: "black",
         }
       }).showToast();
     }
@@ -86,7 +87,8 @@ export class PopUpComponent implements OnInit {
         gravity: "top",
         position: "center",
         style: {
-          background: "rgb(235, 252, 236)"
+          background: "rgb(235, 252, 236)",
+          color: "black",
         }
       }).showToast();
     } 

@@ -24,7 +24,10 @@ export class InreviewComponent implements OnInit {
         close: true,
         gravity: "top",
         position: "center",
-        backgroundColor: "dark",
+        style:{
+          background: "rgb(252, 235, 235)",
+          color: "black"
+        }
       }).showToast();
     } 
     else {
