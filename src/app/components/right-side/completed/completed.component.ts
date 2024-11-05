@@ -1,18 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SaveTaskService } from '../../../save-task-service';
+import Toastify from 'toastify-js';
 
 @Component({
   selector: 'app-completed',
   templateUrl: './completed.component.html',
   styleUrl: './completed.component.css'
 })
-export class CompletedComponent {
+
+export class CompletedComponent implements OnInit {
   constructor(
     private dialog: MatDialog,
     private SaveTaskService: SaveTaskService
   ) {}
+
+  open_dialog_or_not() {
+    if (!this.p_id) {
+      Toastify({
+        text: "⚠️ Select or create a project before adding a task ⚠️",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "dark",
+      }).showToast();
+    } 
+    else {
+      this.openDialog('ToDo', 'Add New Task');
+    }
+  }  
 
   openDialog(
     status: string,
@@ -23,7 +41,7 @@ export class CompletedComponent {
     deadlineDate?: string,
     id?:string
   ) {
-    const dialogRef = this.dialog.open(PopUpComponent, {
+      this.dialog.open(PopUpComponent, {
       width: '670px',
       height: '395px',
       disableClose: true,
@@ -45,6 +63,7 @@ export class CompletedComponent {
   inProgress: any[] = [];
   inReview: any[] = [];
   completed: any[] = [];
+  p_id:string = '';
 
   ngOnInit() {
     this.SaveTaskService.tasks_list.subscribe((tasks) => {
@@ -55,5 +74,7 @@ export class CompletedComponent {
       this.inReview = tasks.filter((task) => task.status === 'In Review');
       this.completed = tasks.filter((task) => task.status === 'Completed');
     });
+
+    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project.id});
   }
 }

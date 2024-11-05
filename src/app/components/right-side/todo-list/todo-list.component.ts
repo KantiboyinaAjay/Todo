@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SaveTaskService } from '../../../save-task-service';
+import Toastify from 'toastify-js';
 
 @Component({
   selector: 'app-todo-list',
@@ -14,6 +15,22 @@ export class TodoListComponent implements OnInit {
     private dialog: MatDialog,
     private SaveTaskService: SaveTaskService
   ) {}
+
+  open_dialog_or_not() {
+    if (!this.p_id) {
+      Toastify({
+        text: "⚠️ Select or create a project before adding a task ⚠️",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "dark",
+      }).showToast();
+    } 
+    else {
+      this.openDialog('ToDo', 'Add New Task');
+    }
+  }  
 
   openDialog(
     status: string,
@@ -46,6 +63,7 @@ export class TodoListComponent implements OnInit {
   inProgress: any[] = [];
   inReview: any[] = [];
   completed: any[] = [];
+  p_id:string = '';
 
   ngOnInit() {
     this.SaveTaskService.tasks_list.subscribe((tasks) => {
@@ -56,5 +74,7 @@ export class TodoListComponent implements OnInit {
       this.inReview = tasks.filter((task) => task.status === 'In Review');
       this.completed = tasks.filter((task) => task.status === 'Completed');
     });
+
+    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project.id});
   }
 }

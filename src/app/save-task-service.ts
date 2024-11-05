@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import Toastify from 'toastify-js';
 
 interface ProjectType{
   id:string;
@@ -43,35 +42,21 @@ export class SaveTaskService {
   addTask(task: any) {
     let p_id: string = '';
     this.selectproject.subscribe((project) => { if (project) p_id = project.id });
-    
-    if(p_id === '')
-    {
-      Toastify({
-        text: "⚠️Select or create a project before adding a task⚠️",
-        duration: 5000,
-        close: true,
-        gravity: "top",
-        position: "center",
-        backgroundColor: "dark",
-      }).showToast();
+  
+    const currentTasks = this.loadTasks(p_id);
+    currentTasks.push(task);
+
+    if (this.isLocalStorageAvailable()) {
+        let dummy_project = JSON.parse(localStorage.getItem('project') || '[]');
+        const index = dummy_project.findIndex((project: any) => project.id === p_id);
+
+        if (index !== -1) {
+            dummy_project[index].task = [...currentTasks];
+            localStorage.setItem('project', JSON.stringify(dummy_project));
+        }
     }
-    else
-    {
-      const currentTasks = this.loadTasks(p_id);
-      currentTasks.push(task);
 
-      if (this.isLocalStorageAvailable()) {
-          let dummy_project = JSON.parse(localStorage.getItem('project') || '[]');
-          const index = dummy_project.findIndex((project: any) => project.id === p_id);
-
-          if (index !== -1) {
-              dummy_project[index].task = [...currentTasks];
-              localStorage.setItem('project', JSON.stringify(dummy_project));
-          }
-      }
-
-      this.tasksSubject.next(currentTasks);
-    }
+    this.tasksSubject.next(currentTasks);
   }
 
 

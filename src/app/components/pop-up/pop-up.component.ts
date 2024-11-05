@@ -38,7 +38,6 @@ export class PopUpComponent implements OnInit {
 
   async update(taskForm: any) {
     const isValid = taskForm.valid;
-    // console.log(isValid);
 
     if (isValid) {
       const taskData = {
@@ -67,6 +66,7 @@ export class PopUpComponent implements OnInit {
 
       this.taskService.addTask(taskData);
       this.resetTaskData();
+      this.dialog.closeAll();
     } 
     else {
       Toastify({
@@ -78,8 +78,6 @@ export class PopUpComponent implements OnInit {
         backgroundColor: "dark",
       }).showToast();
     }
-
-    this.dialog.closeAll();
   }
 
   close() {
