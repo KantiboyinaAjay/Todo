@@ -24,7 +24,6 @@ export class CompletedComponent implements OnInit {
         close: true,
         gravity: "top",
         position: "center",
-        backgroundColor: "dark",
       }).showToast();
     } 
     else {
