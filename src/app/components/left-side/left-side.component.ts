@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SaveTaskService } from '../../save-task-service';
 import { nanoid } from 'nanoid';
+import Toastify from 'toastify-js';
 
 interface ProjectType {
   id: string;
@@ -57,5 +58,16 @@ export class LeftSideComponent implements OnInit {
     this.project.splice(i, 1);
     if (this.savelocal.isLocalStorageAvailable())
       localStorage.setItem('project', JSON.stringify(this.project));
+
+    Toastify({
+      text: "✅ Project Deleted Successfully.",
+      duration: 5000,
+      close: true,
+      gravity: "top",
+      position: "center",
+      style: {
+        background: "rgb(235, 252, 236)"
+      }
+    }).showToast();
   }
 }

@@ -49,6 +49,17 @@ export class PopUpComponent implements OnInit {
       };
       this.taskService.update(taskData);
       this.dialog.closeAll();
+
+      Toastify({
+        text: "✅ Data Updated Successfully.",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        style: {
+          background: "rgb(235, 252, 236)"
+        }
+      }).showToast();
     }
   }
 
@@ -67,10 +78,21 @@ export class PopUpComponent implements OnInit {
       this.taskService.addTask(taskData);
       this.resetTaskData();
       this.dialog.closeAll();
+
+      Toastify({
+        text: "✅ Data is Successfully added.",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        style: {
+          background: "rgb(235, 252, 236)"
+        }
+      }).showToast();
     } 
     else {
       Toastify({
-        text: "🚫Data is invalid. Please enter required inputs🚫",
+        text: "🚫Data is invalid. Please enter required inputs",
         duration: 5000,
         close: true,
         gravity: "top",

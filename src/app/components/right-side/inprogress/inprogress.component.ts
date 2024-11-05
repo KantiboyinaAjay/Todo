@@ -19,7 +19,7 @@ export class InprogressComponent implements OnInit {
   open_dialog_or_not() {
     if (!this.p_id) {
       Toastify({
-        text: "⚠️ Select or create a project before adding a task ⚠️",
+        text: "⚠️ Select or create a project before adding a task",
         duration: 5000,
         close: true,
         gravity: "top",
@@ -28,7 +28,7 @@ export class InprogressComponent implements OnInit {
       }).showToast();
     } 
     else {
-      this.openDialog('ToDo', 'Add New Task');
+      this.openDialog('Inreview', 'Add New Task');
     }
   }  
 

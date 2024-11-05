@@ -3,6 +3,7 @@ import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SaveTaskService } from '../../../save-task-service';
 import Toastify from 'toastify-js';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-todo-list',
@@ -19,12 +20,11 @@ export class TodoListComponent implements OnInit {
   open_dialog_or_not() {
     if (!this.p_id) {
       Toastify({
-        text: "⚠️ Select or create a project before adding a task ⚠️",
+        text: "⚠️ Select or create a project before adding a task",
         duration: 5000,
         close: true,
         gravity: "top",
         position: "center",
-        backgroundColor: "dark",
       }).showToast();
     } 
     else {
