@@ -48,7 +48,7 @@ export class SaveTaskService {
     {
       Toastify({
         text: "⚠️Select or create a project before adding a task⚠️",
-        duration: 2000,
+        duration: 5000,
         close: true,
         gravity: "top",
         position: "center",

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { SaveTaskService } from '../../save-task-service';
 import { nanoid } from 'nanoid';
+import Toastify from 'toastify-js';
 
 @Component({
   selector: 'app-pop-up',
@@ -68,7 +69,14 @@ export class PopUpComponent implements OnInit {
       this.resetTaskData();
     } 
     else {
-      alert(`Data is invalid. Please check your input.`);
+      Toastify({
+        text: "🚫Data is invalid. Please enter required inputs🚫",
+        duration: 5000,
+        close: true,
+        gravity: "top",
+        position: "center",
+        backgroundColor: "dark",
+      }).showToast();
     }
 
     this.dialog.closeAll();

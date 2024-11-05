@@ -26,7 +26,7 @@ export class InreviewComponent {
       this.dialog.open(PopUpComponent, {
       width: '670px',
       height: '395px',
-      disableClose: false,
+      disableClose: true,
       hasBackdrop: true,
       data: {
         type: status,
