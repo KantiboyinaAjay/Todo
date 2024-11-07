@@ -4,10 +4,10 @@
 </div>
 <div class="list-container">
     <ul class="list-group">
-        <li class="list-item" tabindex="0" *ngFor="let pro of project;">
+        <li class="list-item" tabindex="0" *ngFor="let pro of project; let i = index">
             <div class="delete" (click)="store_title(pro)">
-                <span>{{pro.title}}</span>
-                <a (click)="delete(pro.pid)">🗑</a>
+                <span>{{pro.projecttitle}}</span>
+                <a (click)="delete(i)">🗑</a>
             </div>
         </li>
     </ul>
