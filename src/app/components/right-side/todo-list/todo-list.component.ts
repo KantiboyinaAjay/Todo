@@ -79,6 +79,6 @@ export class TodoListComponent implements OnInit {
       this.completed = tasks.filter((task) => task.status === 'Completed');
     });
 
-    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project.id});
+    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project});
   }
 }

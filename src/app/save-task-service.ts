@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 interface ProjectType{
-  id:string;
-  projecttitle: string;
-  task: any[];
+  title: string;
+  pid:string;
+  tasks: string;
 }
 
 @Injectable({
@@ -19,6 +20,8 @@ export class SaveTaskService {
   tasks_list = this.tasksSubject.asObservable();
   current_title = this.titleSubject.asObservable();
   selectproject = this.selectedProject.asObservable();
+
+  constructor(private http : HttpClient){}
 
   public isLocalStorageAvailable(): boolean {
     return typeof window !== 'undefined' && typeof localStorage !== 'undefined';
@@ -36,12 +39,18 @@ export class SaveTaskService {
             current = [...task_current];
         }
     }
+
+    // this.http.get<any[]>(`http://localhost:9000/api/getTasks/${project_id}`).subscribe(
+    //   (res) => {
+    //     current = res;
+    //   }
+    // );
     return current;
   }
 
   addTask(task: any) {
     let p_id: string = '';
-    this.selectproject.subscribe((project) => { if (project) p_id = project.id });
+    this.selectproject.subscribe((project) => { if (project) p_id = project.pid });
   
     const currentTasks = this.loadTasks(p_id);
     currentTasks.push(task);
@@ -62,7 +71,7 @@ export class SaveTaskService {
 
   update(task: any) {
     var p_id: string = '';
-    this.selectproject.subscribe((project) => {if(project) p_id = project.id});
+    this.selectproject.subscribe((project) => {if(project) p_id = project.pid});
 
     var tasks = this.loadTasks(p_id);
     const task_index = tasks.findIndex((t:any) => t.id === task.id);
@@ -92,7 +101,7 @@ export class SaveTaskService {
 
   setSelectedProject(project: ProjectType): void {
     this.selectedProject.next(project);
-    const task = this.loadTasks(project.id);
+    const task = this.loadTasks(project.pid);
     this.tasksSubject.next(task);
   }
 }

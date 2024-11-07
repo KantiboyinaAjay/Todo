@@ -4,7 +4,7 @@ import {
   provideClientHydration,
 } from '@angular/platform-browser';
 
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LeftSideComponent } from './components/left-side/left-side.component';
@@ -43,6 +43,7 @@ import { CompletedComponent } from './components/right-side/completed/completed.
     ReactiveFormsModule,
     MatInputModule,
     MatSelectModule,
+    HttpClientModule,
   ],
   providers: [provideClientHydration(), provideAnimationsAsync()],
   bootstrap: [AppComponent],
