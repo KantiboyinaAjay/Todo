@@ -23,7 +23,7 @@ export class SaveTaskService {
   constructor(private http: HttpClient) {}
 
   public loadTasks(project_id: string): void {
-    this.http.get<any[]>(`http://localhost:9000/getTasks/${project_id}`).subscribe(
+    this.http.get<any[]>(`https://todo-backend-gtqe.onrender.com/getTasks/${project_id}`).subscribe(
       (res) => {
         console.log(res);
         this.tasksSubject.next(res);
@@ -38,7 +38,7 @@ export class SaveTaskService {
     this.selectproject.subscribe((project) => {
       if (project) {
         task.pid = project.pid;
-        this.http.post('http://localhost:9000/addTask', task).subscribe(
+        this.http.post('https://todo-backend-gtqe.onrender.com/addTask', task).subscribe(
           (res) => {
             this.loadTasks(project.pid);
           },
@@ -55,7 +55,7 @@ export class SaveTaskService {
     this.selectproject.subscribe((project) => {
       if (project) {
         console.log(task);
-        this.http.put(`http://localhost:9000/updateTask`, task).subscribe(
+        this.http.put(`https://todo-backend-gtqe.onrender.com/updateTask`, task).subscribe(
           (res) => {
             this.loadTasks(project.pid);
           },
