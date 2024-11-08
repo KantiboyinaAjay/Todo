@@ -75,8 +75,8 @@ const updateTasksbyId = async (req, res) => {
     }
 
     res.status(200).json({ status: "Success", updatedTask });
-  } catch (error) {
-    // console.error("Error updating task:", error);
+  } 
+  catch (error) {
     res.status(500).json({ status: "Failed", msg: "Error updating task" });
   }
 };
@@ -84,6 +84,7 @@ const updateTasksbyId = async (req, res) => {
 const deleteProject = async (req, res) => {
   const { pid } = req.params;
   try {
+    deleteTasksBeasedonProject(pid);
     await projectSchema.findOneAndDelete({ pid: pid });
   } 
   catch (e) {
@@ -91,6 +92,18 @@ const deleteProject = async (req, res) => {
   }
   res.status(200).send({ status: "success" });
 };
+
+const deleteTasksBeasedonProject = async (proid) => {
+  try{
+    await taskModel.deleteMany({pid: proid})
+  }
+  catch(err)
+  {
+    (err) => {
+      console.log(err);
+    }
+  }
+}
 
 module.exports = {
   addProjects,

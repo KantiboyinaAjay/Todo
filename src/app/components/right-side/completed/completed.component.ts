@@ -42,7 +42,7 @@ export class CompletedComponent implements OnInit {
     taskName?: string,
     startDate?: string,
     deadlineDate?: string,
-    id?:string
+    taskId?:string,
   ) {
       this.dialog.open(PopUpComponent, {
       width: '670px',
@@ -51,12 +51,13 @@ export class CompletedComponent implements OnInit {
       hasBackdrop: true,
       data: {
         type: status,
-        taskName: taskName == null ? '' : taskName,
-        startDate: startDate == null ? '' : startDate,
-        deadlineDate: deadlineDate == null ? '' : deadlineDate,
+        taskName: taskName || '',
+        startDate: startDate || '',
+        deadlineDate: deadlineDate || '',
+        taskId: taskId || '',
         heading: heading,
         operation:operationType,
-        id: id,
+        pid: this.p_id
       },
     });
   }
@@ -72,12 +73,12 @@ export class CompletedComponent implements OnInit {
     this.SaveTaskService.tasks_list.subscribe((tasks) => {
       this.tasks = tasks;
 
-      this.todo = tasks.filter((task) => task.status === 'ToDo');
-      this.inProgress = tasks.filter((task) => task.status === 'In Progress');
-      this.inReview = tasks.filter((task) => task.status === 'In Review');
+      this.todo = tasks.filter((task) => task.status === 'Todo');
+      this.inProgress = tasks.filter((task) => task.status === 'In Review');
+      this.inReview = tasks.filter((task) => task.status === 'In Progress');
       this.completed = tasks.filter((task) => task.status === 'Completed');
     });
 
-    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project.id});
+    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project.pid});
   }
 }

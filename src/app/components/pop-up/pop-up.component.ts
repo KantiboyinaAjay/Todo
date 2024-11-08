@@ -27,7 +27,7 @@ export class PopUpComponent implements OnInit {
 
   ngOnInit(): void {
     this.operationButtonText = this.data.operation == 'Save' ? 'Save' : 'Add';
-    this.taskService.selectproject.subscribe((project: any) => this.p_id = project.pid)
+    this.taskService.selectproject.subscribe((project: any) => this.p_id = project.pid);
   }
   popUpHeading = this.data.heading;
 

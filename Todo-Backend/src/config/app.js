@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(cors());
-app.use("/api", require("../Routes/routes"));
+app.use("/", require("../Routes/routes"));
 
 mongoose
   .connect(

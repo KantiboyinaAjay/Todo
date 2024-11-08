@@ -1,6 +1,6 @@
 <div class="todo">• ToDo</div>
 <div *ngFor="let td of todo" class="task-card"
-    (click)="openDialog(td.status,'Edit Task','Save',td.taskName,td.startDate,td.deadlineDate,td.id)">
+    (click)="openDialog(td.status,'Edit Task','Save',td.taskName,td.startDate,td.deadlineDate,td.taskId)">
     <div class="task-name">
         {{ td?.taskName || 'No task name available' }}
     </div>

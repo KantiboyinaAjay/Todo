@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { SaveTaskService } from '../../save-task-service';
 import { nanoid } from 'nanoid';
 import Toastify from 'toastify-js';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 interface ProjectType {
-  id: string;
-  projecttitle: string;
-  task: any[];
+  title: string;
+  pid:string;
+  tasks: string;
 }
 
 @Component({
@@ -16,71 +17,72 @@ interface ProjectType {
 })
 export class LeftSideComponent implements OnInit {
   
-  project: ProjectType[] = [];
+  project: any[] = [];
   showinput: boolean = false;
   inputvalue: string = '';
 
-  constructor(private savelocal: SaveTaskService) {}
+  constructor(private savelocal: SaveTaskService , private http: HttpClient) {}
   ngOnInit(): void {
-    if (this.savelocal.isLocalStorageAvailable()) {
-      const saved_projects = localStorage.getItem('project');
-      if (saved_projects) {
-        this.project = JSON.parse(saved_projects);
+    this.http.get<any[]>('http://localhost:9000/getProjects').subscribe(
+      (res) => {
+        this.project = res;
       }
+    );
+  }
+
+  saveinput() {
+    if (this.inputvalue.trim()) {
+      const data_project = {
+        title: this.inputvalue.trim(),
+        pid: nanoid(),
+        tasks:""
+      }
+      this.http.post('http://localhost:9000/addProject' , data_project).subscribe(
+        (response) => {
+          this.project.push(data_project);
+          Toastify({
+            text: "✅ Project Created.",
+            duration: 5000,
+            close: true,
+            gravity: "top",
+            position: "center",
+            style: {
+              background: "rgb(235, 252, 236)",
+              color: "black"
+            }
+          }).showToast();
+        }
+      );
+      this.inputvalue = '';
+      this.showinput = false;
     }
   }
 
+  delete(i: string): void {
+    this.http.delete(`http://localhost:9000/deleteProject/${i}`).subscribe(
+      (res) => {
+        this.project = this.project.filter((pro) => pro.pid !== i);
+        Toastify({
+          text: "✅ Project Deleted Successfully.",
+          duration: 5000,
+          close: true,
+          gravity: "top",
+          position: "center",
+          style: {
+            background: "rgb(235, 252, 236)",
+            color: "black"
+          }
+        }).showToast();
+      }
+    );
+  }
+  
   store_title(project: ProjectType): void {
-    this.savelocal.updatetitle(project.projecttitle);
+    this.savelocal.updatetitle(project.title);
     this.savelocal.setSelectedProject(project);
   }
 
   toggleinput() {
     this.showinput = !this.showinput;
-  }
-
-  saveinput() {
-    if (this.inputvalue.trim()) {
-      const new_project: ProjectType = {
-        id: nanoid(),
-        projecttitle: this.inputvalue.trim(),
-        task: [],
-      };
-      this.project.push(new_project);
-      this.inputvalue = '';
-      this.showinput = false;
-      if (this.savelocal.isLocalStorageAvailable())
-        localStorage.setItem('project', JSON.stringify(this.project));
-
-      Toastify({
-        text: "✅ Project Created.",
-        duration: 5000,
-        close: true,
-        gravity: "top",
-        position: "center",
-        style: {
-          background: "rgb(235, 252, 236)",
-          color: "black"
-        }
-      }).showToast();
-    }
-  }
-
-  delete(i: number): void {
-    this.project.splice(i, 1);
-    if (this.savelocal.isLocalStorageAvailable())
-      localStorage.setItem('project', JSON.stringify(this.project));
-
-    Toastify({
-      text: "✅ Project Deleted Successfully.",
-      duration: 5000,
-      close: true,
-      gravity: "top",
-      position: "center",
-      style: {
-        background: "rgb(235, 252, 236)",
-        color: "black"
-      }
-    }).showToast();
   }
 }

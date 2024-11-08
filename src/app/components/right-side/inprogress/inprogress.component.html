@@ -1,6 +1,6 @@
 <div class="todo-in-progress">• In Progress</div>
 <div *ngFor="let td of inProgress" class="task-card"
-    (click)="openDialog(td.status,'Edit Task','Save',td.taskName,td.startDate,td.deadlineDate,td.id)">
+    (click)="openDialog(td.status,'Edit Task','Save',td.taskName,td.startDate,td.deadlineDate,td.taskId)">
     <div class="task-name">
         {{ td?.taskName || 'No task name available' }}
     </div>

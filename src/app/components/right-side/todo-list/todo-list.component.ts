@@ -3,7 +3,6 @@ import { PopUpComponent } from '../../pop-up/pop-up.component';
 import { MatDialog } from '@angular/material/dialog';
 import { SaveTaskService } from '../../../save-task-service';
 import Toastify from 'toastify-js';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-todo-list',
@@ -32,7 +31,7 @@ export class TodoListComponent implements OnInit {
       }).showToast();
     } 
     else {
-      this.openDialog('ToDo', 'Add New Task');
+      this.openDialog('Todo', 'Add New Task');
     }
   }  
 
@@ -43,7 +42,7 @@ export class TodoListComponent implements OnInit {
     taskName?: string,
     startDate?: string,
     deadlineDate?: string,
-    id?:string
+    taskId ?: string
   ) {
       this.dialog.open(PopUpComponent, {
       width: '670px',
@@ -52,12 +51,13 @@ export class TodoListComponent implements OnInit {
       hasBackdrop: true,
       data: {
         type: status,
-        taskName: taskName == null ? '' : taskName,
-        startDate: startDate == null ? '' : startDate,
-        deadlineDate: deadlineDate == null ? '' : deadlineDate,
+        taskName: taskName || '',
+        startDate: startDate || '',
+        deadlineDate: deadlineDate || '',
+        taskId: taskId || '',
         heading: heading,
         operation:operationType,
-        id: id,
+        pid: this.p_id
       },
     });
   }
@@ -73,12 +73,12 @@ export class TodoListComponent implements OnInit {
     this.SaveTaskService.tasks_list.subscribe((tasks) => {
       this.tasks = tasks;
 
-      this.todo = tasks.filter((task) => task.status === 'ToDo');
+      this.todo = tasks.filter((task) => task.status === 'Todo');
       this.inProgress = tasks.filter((task) => task.status === 'In Progress');
       this.inReview = tasks.filter((task) => task.status === 'In Review');
       this.completed = tasks.filter((task) => task.status === 'Completed');
     });
 
-    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project});
+    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project.pid});
   }
 }
