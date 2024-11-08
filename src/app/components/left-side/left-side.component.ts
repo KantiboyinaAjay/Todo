@@ -62,6 +62,7 @@ export class LeftSideComponent implements OnInit {
     this.http.delete(`https://todo-backend-gtqe.onrender.com/deleteProject/${i}`).subscribe(
       (res) => {
         this.project = this.project.filter((pro) => pro.pid !== i);
+        this.ngOnInit();
         Toastify({
           text: "✅ Project Deleted Successfully.",
           duration: 5000,
