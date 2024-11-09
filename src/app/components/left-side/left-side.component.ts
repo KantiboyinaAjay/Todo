@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SaveTaskService } from '../../save-task-service';
 import { nanoid } from 'nanoid';
 import Toastify from 'toastify-js';
@@ -21,7 +21,7 @@ export class LeftSideComponent implements OnInit {
   showinput: boolean = false;
   inputvalue: string = '';
 
-  constructor(private savelocal: SaveTaskService , private http: HttpClient) {}
+  constructor(private savelocal: SaveTaskService , private http: HttpClient , private changedetector: ChangeDetectorRef) {}
   ngOnInit(): void {
     this.refreshProjects();
   }
@@ -30,6 +30,7 @@ export class LeftSideComponent implements OnInit {
     this.http.get<any[]>('https://todobackend-k0qq.onrender.com/getProjects').subscribe(
       (res) => {
         this.project = res;
+        this.changedetector.detectChanges();
       }
     );
   }
