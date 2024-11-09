@@ -28,7 +28,8 @@ export class LeftSideComponent implements OnInit {
 
   refreshProjects() {
     this.http.get<ProjectType[]>('https://task-backend-kerz.onrender.com/getProjects', {
-      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' }
+      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+      params: { v: new Date().getTime().toString() }
     })
     .subscribe(
       (res) => { 
