@@ -27,7 +27,7 @@ export class LeftSideComponent implements OnInit {
   }
 
   refreshProjects() {
-    this.http.get<any[]>('https://todobackend-k0qq.onrender.com/getProjects').subscribe(
+    this.http.get<any[]>('https://task-backend-kerz.onrender.com/getProjects').subscribe(
       (res) => {
         this.project = res;
       }
@@ -41,7 +41,7 @@ export class LeftSideComponent implements OnInit {
         pid: nanoid(),
         tasks:""
       }
-      this.http.post('https://todobackend-k0qq.onrender.com/addProject' , data_project).subscribe(
+      this.http.post('https://task-backend-kerz.onrender.com/addProject' , data_project).subscribe(
         (response) => {
           this.refreshProjects();
           Toastify({
@@ -63,7 +63,7 @@ export class LeftSideComponent implements OnInit {
   }
 
   delete(i: string): void {
-    this.http.delete(`https://todobackend-k0qq.onrender.com/deleteProject/${i}`).subscribe(
+    this.http.delete(`https://task-backend-kerz.onrender.com/deleteProject/${i}`).subscribe(
       (res) => {
         this.refreshProjects();
         Toastify({
