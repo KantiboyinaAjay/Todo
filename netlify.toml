@@ -1,5 +1,5 @@
 [[headers]]
-for = "/getProjects"  # This should match your API endpoint path
+  for = "/*"
   [headers.values]
     Cache-Control = "no-cache, no-store, must-revalidate"
     Pragma = "no-cache"
