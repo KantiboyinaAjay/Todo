@@ -43,8 +43,8 @@ export class LeftSideComponent implements OnInit {
       }
       this.http.post('https://task-backend-kerz.onrender.com/addProject' , data_project).subscribe(
         (response) => {
-          // this.refreshProjects();
-          this.project.push(data_project);
+          this.refreshProjects();
+          // this.project.push(data_project);
           Toastify({
             text: "✅ Project Created.",
             duration: 5000,
@@ -66,8 +66,8 @@ export class LeftSideComponent implements OnInit {
   delete(i: string): void {
     this.http.delete(`https://task-backend-kerz.onrender.com/deleteProject/${i}`).subscribe(
       (res) => {
-        // this.refreshProjects();
-        this.project = this.project.filter((pro) => pro.pid !== i);
+        this.refreshProjects();
+        // this.project = this.project.filter((pro) => pro.pid !== i);
         Toastify({
           text: "✅ Project Deleted Successfully.",
           duration: 5000,
