@@ -28,9 +28,7 @@ export class LeftSideComponent implements OnInit {
 
   refreshProjects() {
     this.http.get<any[]>('https://task-backend-kerz.onrender.com/getProjects').subscribe(
-      (res) => {
-        this.project = res;
-      }
+      (res) => { this.project = res; }
     );
   }
 
@@ -44,7 +42,7 @@ export class LeftSideComponent implements OnInit {
       this.http.post('https://task-backend-kerz.onrender.com/addProject' , data_project).subscribe(
         (response) => {
           this.refreshProjects();
-          // this.project.push(data_project);
+          // this.project.push(data_project);   
           Toastify({
             text: "✅ Project Created.",
             duration: 5000,
