@@ -27,6 +27,9 @@ export class LeftSideComponent implements OnInit {
     this.http.get<any[]>('https://todobackend-k0qq.onrender.com/getProjects').subscribe(
       (res) => {
         this.project = res;
+      },
+      (err) => {
+        console.log(err);
       }
     );
     
