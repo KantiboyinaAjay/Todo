@@ -26,7 +26,7 @@ export class LeftSideComponent implements OnInit {
     
     this.http.get<any[]>('https://todobackend-k0qq.onrender.com/getProjects').subscribe(
       (res) => {
-        console.log(`response for get projects ${res}`);
+        console.log(`response for get projects ${res[0].title}`);
         this.project = res;
       },
       (err) => {
@@ -46,7 +46,6 @@ export class LeftSideComponent implements OnInit {
       this.http.post('https://todobackend-k0qq.onrender.com/addProject' , data_project).subscribe(
         (response) => {
           this.project.push(data_project);
-          this.ngOnInit();
           Toastify({
             text: "✅ Project Created.",
             duration: 5000,
@@ -69,7 +68,6 @@ export class LeftSideComponent implements OnInit {
     this.http.delete(`https://todobackend-k0qq.onrender.com/deleteProject/${i}`).subscribe(
       (res) => {
         this.project = this.project.filter((pro) => pro.pid !== i);
-        this.ngOnInit();
         Toastify({
           text: "✅ Project Deleted Successfully.",
           duration: 5000,
