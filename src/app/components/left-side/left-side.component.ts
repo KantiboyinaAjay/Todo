@@ -23,11 +23,14 @@ export class LeftSideComponent implements OnInit {
 
   constructor(private savelocal: SaveTaskService , private http: HttpClient) {}
   ngOnInit(): void {
-    this.http.get<any[]>('https://todobackend-k0qq.onrender.com/getProjects').subscribe(
-      (res) => {
-        this.project = res;
-      }
-    );
+    if(this.project.length > 0)
+    {
+      this.http.get<any[]>('https://todobackend-k0qq.onrender.com/getProjects').subscribe(
+        (res) => {
+          this.project = res;
+        }
+      );
+    }
   }
 
   saveinput() {
