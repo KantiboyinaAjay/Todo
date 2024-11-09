@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SaveTaskService } from '../../save-task-service';
 import { nanoid } from 'nanoid';
 import Toastify from 'toastify-js';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 interface ProjectType {
   title: string;
@@ -28,7 +28,10 @@ export class LeftSideComponent implements OnInit {
 
   refreshProjects() {
     this.http.get<any[]>('https://task-backend-kerz.onrender.com/getProjects').subscribe(
-      (res) => { this.project = res; }
+      (res) => { 
+        this.project = res; 
+        console.log('after refresh : ',res);
+      }
     );
   }
 
