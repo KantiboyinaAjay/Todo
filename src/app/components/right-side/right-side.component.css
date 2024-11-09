@@ -19,3 +19,21 @@
     flex-direction: column;
     border-right: 1px solid rgba(216, 224, 253, 1);
 }
+
+@media (max-width: 768px) {
+    .todo-types {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+    .col{
+        height: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .todo-types {
+        grid-template-columns: 1fr; 
+    }
+    .col{
+        height: auto;
+    }
+}
