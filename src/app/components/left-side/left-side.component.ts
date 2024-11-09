@@ -23,17 +23,18 @@ export class LeftSideComponent implements OnInit {
 
   constructor(private savelocal: SaveTaskService , private http: HttpClient) {}
   ngOnInit(): void {
-    
+    this.refreshProjects();
+  }
+
+  refreshProjects() {
     this.http.get<any[]>('https://todobackend-k0qq.onrender.com/getProjects').subscribe(
       (res) => {
-        console.log(`response for get projects ${res[0].title}`);
         this.project = res;
       },
       (err) => {
-        console.log(err);
+        console.error("Error refreshing projects:", err);
       }
     );
-    
   }
 
   saveinput() {
@@ -45,7 +46,7 @@ export class LeftSideComponent implements OnInit {
       }
       this.http.post('https://todobackend-k0qq.onrender.com/addProject' , data_project).subscribe(
         (response) => {
-          this.project.push(data_project);
+          this.refreshProjects();
           Toastify({
             text: "✅ Project Created.",
             duration: 5000,
@@ -67,7 +68,7 @@ export class LeftSideComponent implements OnInit {
   delete(i: string): void {
     this.http.delete(`https://todobackend-k0qq.onrender.com/deleteProject/${i}`).subscribe(
       (res) => {
-        this.project = this.project.filter((pro) => pro.pid !== i);
+        this.refreshProjects();
         Toastify({
           text: "✅ Project Deleted Successfully.",
           duration: 5000,
