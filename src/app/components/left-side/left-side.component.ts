@@ -33,8 +33,7 @@ export class LeftSideComponent implements OnInit {
     })
     .subscribe(
       (res) => { 
-        this.project = res; 
-        console.log('after refresh : ',res);
+        this.project = res;
         this.cdr.detectChanges();
       }
     );
@@ -49,8 +48,7 @@ export class LeftSideComponent implements OnInit {
       }
       this.http.post('https://task-backend-kerz.onrender.com/addProject' , data_project).subscribe(
         (response) => {
-          this.refreshProjects();
-          // this.project.push(data_project);   
+          this.refreshProjects();  
           Toastify({
             text: "✅ Project Created.",
             duration: 5000,
@@ -73,7 +71,6 @@ export class LeftSideComponent implements OnInit {
     this.http.delete(`https://task-backend-kerz.onrender.com/deleteProject/${i}`).subscribe(
       (res) => {
         this.refreshProjects();
-        // this.project = this.project.filter((pro) => pro.pid !== i);
         Toastify({
           text: "✅ Project Deleted Successfully.",
           duration: 5000,
