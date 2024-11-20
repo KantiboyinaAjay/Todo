@@ -16,6 +16,26 @@ export class TodoListComponent implements OnInit {
     private SaveTaskService: SaveTaskService
   ) {}
 
+  tasks: any[] = [];
+  todo: any[] = [];
+  inProgress: any[] = [];
+  inReview: any[] = [];
+  completed: any[] = [];
+  p_id:string = '';
+
+  ngOnInit() {
+    this.SaveTaskService.tasks_list.subscribe((tasks) => {
+      this.tasks = tasks;
+
+      this.todo = tasks.filter((task) => task.status === 'Todo');
+      this.inProgress = tasks.filter((task) => task.status === 'In Progress');
+      this.inReview = tasks.filter((task) => task.status === 'In Review');
+      this.completed = tasks.filter((task) => task.status === 'Completed');
+    });
+
+    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project.pid});
+  }
+
   open_dialog_or_not() {
     if (!this.p_id) {
       Toastify({
@@ -60,25 +80,5 @@ export class TodoListComponent implements OnInit {
         pid: this.p_id
       },
     });
-  }
-
-  tasks: any[] = [];
-  todo: any[] = [];
-  inProgress: any[] = [];
-  inReview: any[] = [];
-  completed: any[] = [];
-  p_id:string = '';
-
-  ngOnInit() {
-    this.SaveTaskService.tasks_list.subscribe((tasks) => {
-      this.tasks = tasks;
-
-      this.todo = tasks.filter((task) => task.status === 'Todo');
-      this.inProgress = tasks.filter((task) => task.status === 'In Progress');
-      this.inReview = tasks.filter((task) => task.status === 'In Review');
-      this.completed = tasks.filter((task) => task.status === 'Completed');
-    });
-
-    this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project.pid});
   }
 }
