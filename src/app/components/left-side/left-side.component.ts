@@ -41,8 +41,8 @@ export class LeftSideComponent implements OnInit {
     .subscribe(
       (res) => { 
         this.project = res;
-        this.loading = false;
         this.cdr.detectChanges();
+        this.loading = false;
       }
     );
   }
