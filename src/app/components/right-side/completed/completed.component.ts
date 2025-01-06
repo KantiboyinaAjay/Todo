@@ -73,9 +73,6 @@ export class CompletedComponent implements OnInit {
     this.SaveTaskService.tasks_list.subscribe((tasks) => {
       this.tasks = tasks;
 
-      this.todo = tasks.filter((task) => task.status === 'Todo');
-      this.inProgress = tasks.filter((task) => task.status === 'In Review');
-      this.inReview = tasks.filter((task) => task.status === 'In Progress');
       this.completed = tasks.filter((task) => task.status === 'Completed');
     });
 

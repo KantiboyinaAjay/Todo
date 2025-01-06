@@ -25,7 +25,6 @@ export class SaveTaskService {
   public loadTasks(project_id: string): void {
     this.http.get<any[]>(`https://task-backend-kerz.onrender.com/getTasks/${project_id}`).subscribe(
       (res) => {
-        console.log(res);
         this.tasksSubject.next(res);
       },
       (error) => {
@@ -54,7 +53,6 @@ export class SaveTaskService {
 
     this.selectproject.subscribe((project) => {
       if (project) {
-        console.log(task);
         this.http.put(`https://task-backend-kerz.onrender.com/updateTask`, task).subscribe(
           (res) => {
             this.loadTasks(project.pid);

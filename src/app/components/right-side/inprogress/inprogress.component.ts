@@ -73,10 +73,7 @@ export class InprogressComponent implements OnInit {
     this.SaveTaskService.tasks_list.subscribe((tasks) => {
       this.tasks = tasks;
 
-      this.todo = tasks.filter((task) => task.status === 'Todo');
       this.inProgress = tasks.filter((task) => task.status === 'In Progress');
-      this.inReview = tasks.filter((task) => task.status === 'In Review');
-      this.completed = tasks.filter((task) => task.status === 'Completed');
     });
 
     this.SaveTaskService.selectproject.subscribe((project:any) => {if(project) this.p_id = project.pid});

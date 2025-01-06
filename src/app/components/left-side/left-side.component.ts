@@ -20,21 +20,24 @@ export class LeftSideComponent implements OnInit {
   project: any[] = [];
   showinput: boolean = false;
   inputvalue: string = '';
+  loading: boolean = false;
 
-  constructor(private savelocal: SaveTaskService , private http: HttpClient, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private savelocal: SaveTaskService , 
+    private http: HttpClient
+  ) {}
+  
   ngOnInit(): void {
     this.refreshProjects();
   }
 
   refreshProjects() {
-    this.http.get<ProjectType[]>('https://task-backend-kerz.onrender.com/getProjects', {
-      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
-      params: { v: new Date().getTime().toString() }
-    })
+    this.loading = true;
+    this.http.get<ProjectType[]>('https://task-backend-kerz.onrender.com/getProjects')
     .subscribe(
       (res) => { 
         this.project = res;
-        this.cdr.detectChanges();
+        this.loading = false;
       }
     );
   }
