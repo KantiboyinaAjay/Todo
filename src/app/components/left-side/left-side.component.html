@@ -2,6 +2,9 @@
     <img src="../../../assets/ghost-org.png" alt="Loading..">
     <h2>Task Board</h2>
 </div>
+
+<div *ngIf = "loading" class="Load"></div>
+
 <div class="list-container" *ngIf="!loading">
     <ul class="list-group">
         <li class="list-item" tabindex="0" *ngFor="let pro of project;">
@@ -11,10 +14,6 @@
             </div>
         </li>
     </ul>
-</div>
-<div *ngIf = "loading">
-    <img src="../../../assets/Load.gif">
-    <h1 style="display: flex; align-items: center; justify-content: center;">Loading..</h1>
 </div>
 <input 
     type="text"
