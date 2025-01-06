@@ -24,7 +24,8 @@ export class LeftSideComponent implements OnInit {
 
   constructor(
     private savelocal: SaveTaskService , 
-    private http: HttpClient
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
   ) {}
   
   ngOnInit(): void {
@@ -33,10 +34,14 @@ export class LeftSideComponent implements OnInit {
 
   refreshProjects() {
     this.loading = true;
-    this.http.get<ProjectType[]>('https://task-backend-kerz.onrender.com/getProjects')
+    this.http.get<ProjectType[]>('https://task-backend-kerz.onrender.com/getProjects', {
+      headers: { 'Cache-Control': 'no-cache', 'Pragma': 'no-cache' },
+      params: { v: new Date().getTime().toString() }
+    })
     .subscribe(
       (res) => { 
         this.project = res;
+        this.cdr.detectChanges();
         this.loading = false;
       }
     );
