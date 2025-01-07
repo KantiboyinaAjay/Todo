@@ -1,11 +1,16 @@
 <div class="popup-container">
   <div class="title">
-    <div [ngStyle]="{ 'color':'rgba(38, 63, 160, 1)'}">
+
+    <div style=" color:rgba(38, 63, 160, 1)">
       {{popUpHeading}}
     </div>
-    <mat-icon aria-hidden="false" aria-label="close icon" fontIcon="close" (click)="close()"
-      [ngStyle]="{ color: 'rgba(151, 161, 178, 1)', cursor: 'pointer' }">
-    </mat-icon>
+
+    <mat-icon 
+      fontIcon="close" 
+      (click)="close()"
+      style =" color: rgba(151, 161, 178, 1); cursor: pointer"
+    />
+    
   </div>
   <hr />
 
