@@ -20,7 +20,7 @@ export class LeftSideComponent implements OnInit {
   project: any[] = [];
   showinput: boolean = false;
   inputvalue: string = '';
-  loading: boolean = false;
+  loading: boolean = true;
 
   constructor(
     private savelocal: SaveTaskService , 
@@ -39,7 +39,7 @@ export class LeftSideComponent implements OnInit {
       params: { v: new Date().getTime().toString() }
     })
     .subscribe(
-      (res) => { 
+      (res) => {
         this.project = res;
         this.loading = false;
         this.cdr.detectChanges();
