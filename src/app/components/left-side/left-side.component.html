@@ -5,7 +5,7 @@
 
 <div *ngIf = "loading" class="Load"></div>
 
-<div class="list-container" *ngIf="!loading">
+<div class="list-container" *ngIf="project.length && !loading">
     <ul class="list-group">
         <li class="list-item" tabindex="0" *ngFor="let pro of project;">
             <div class="delete" (click)="store_title(pro)">
